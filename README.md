@@ -7,4 +7,4 @@ This STM32F411 project uses EXTI0/1 to detect button presses and map each to a c
 - Bare-metal interrupt setup
 - Custom struct to map button to action
 
-- starup and linker file are in progress
+- custom startup and linker file 
