@@ -67,12 +67,11 @@ This demonstrates understanding of:
 
 PROJECT STRUCTURE
 -----------------
-.
-├── main.c        Application logic (GPIO, EXTI, mapping table)
-├── startup.c     Vector table and reset/startup code
-├── linker.ld     Memory map and section placement
-├── makefile      Build system (no IDE)
-└── stm32f4xx.h   Minimal register definitions
+main.c ----->   Application logic (GPIO, EXTI, mapping table)
+startup.c --->  Vector table and reset/startup code
+linker.ld---->  Memory map and section placement
+makefile---->   Build system (no IDE)
+stm32f4xx.h---> Minimal register definitions
 
 
 BUILD INSTRUCTIONS
