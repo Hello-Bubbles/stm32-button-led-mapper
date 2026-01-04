@@ -1,5 +1,3 @@
-<img width="324" height="463" alt="image" src="https://github.com/user-attachments/assets/5ef83c26-4473-494e-8452-efc3f0431dab" />STM32 BUTTON-TO-LED MAPPER (BARE-METAL)
-
 A bare-metal STM32F411 firmware project that maps button interrupts (EXTI)
 to LED actions using a function-pointer mapping table, similar to a small
 software interrupt table.
