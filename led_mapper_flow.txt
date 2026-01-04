@@ -1,0 +1,17 @@
+Button (PD0 / PD1)
+        |
+        |  EXTI line
+        v
+EXTI0 / EXTI1 IRQ
+        |
+        |  common ISR
+        v
+Clear EXTI pending bit
+        |
+        |  lookup
+        v
+Button → Callback Mapping Table
+        |
+        |  function pointer
+        v
+LED Action (PD12 / PD13)
