@@ -150,32 +150,32 @@ The interrupt logic itself does not need to change.
 
 ## What I Learned / Bugs I Hit
 
--> How the Cortex-M reset flow jumps from vector table → Reset_Handler
--> Importance of correct vector table placement in FLASH
--> Why unused interrupts should have weak aliases
+* How the Cortex-M reset flow jumps from vector table → Reset_Handler
+* Importance of correct vector table placement in FLASH
+* Why unused interrupts should have weak aliases
 EXTI pitfalls:
--> forgetting to clear pending bits causes repeated interrupts
--> incorrect SYSCFG EXTICR mapping breaks EXTI routing
--> NVIC enable alone is not enough — EXTI + SYSCFG + GPIO must all agree
--> How linker symbols are used during startup for .data and .bss init
--> How to debug early startup code before main() using GDB
+* forgetting to clear pending bits causes repeated interrupts
+* incorrect SYSCFG EXTICR mapping breaks EXTI routing
+* NVIC enable alone is not enough — EXTI + SYSCFG + GPIO must all agree
+* How linker symbols are used during startup for .data and .bss init
+* How to debug early startup code before main() using GDB
 
 ## Limitations
 
--> Busy-wait delay (not timer-based)
--> No button debounce logic
--> Only two EXTI lines demonstrated
--> Minimal register header (not CMSIS-complete)
--> No low-power modes used
+* Busy-wait delay (not timer-based)
+* No button debounce logic
+* Only two EXTI lines demonstrated
+* Minimal register header (not CMSIS-complete)
+* No low-power modes used
 
 ## Possible Extensions
 
--> Add software debounce using a timer
--> Support both rising and falling edge triggers
--> Expand mapping table to support:
--> long-press
--> double-click
--> Replace busy-wait with SysTick or TIM delay
--> Add event queue instead of direct callback invocation
--> Extend to matrix keypad scanning
+* Add software debounce using a timer
+* Support both rising and falling edge triggers
+* Expand mapping table to support:
+* long-press
+* double-click
+* Replace busy-wait with SysTick or TIM delay
+* Add event queue instead of direct callback invocation
+* Extend to matrix keypad scanning
 
