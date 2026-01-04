@@ -1,4 +1,4 @@
-STM32 BUTTON-TO-LED MAPPER (BARE-METAL)
+<img width="324" height="463" alt="image" src="https://github.com/user-attachments/assets/5ef83c26-4473-494e-8452-efc3f0431dab" />STM32 BUTTON-TO-LED MAPPER (BARE-METAL)
 
 A bare-metal STM32F411 firmware project that maps button interrupts (EXTI)
 to LED actions using a function-pointer mapping table, similar to a small
@@ -8,18 +8,25 @@ The project is built without an IDE and includes a custom startup file,
 linker script, and Makefile to demonstrate the complete embedded firmware
 bring-up flow.
 
+## Design Rationale
 
-WHY THIS PROJECT
-----------------
-Beginner firmware often handles buttons using nested if/else statements.
-This project uses a scalable and maintainable approach:
+Why function pointers?
+Avoids large if/else or switch-case blocks
+Makes button behavior extensible without touching ISR logic
+Mirrors real-world embedded patterns (keypads, menu systems, HMI)
 
-- Button presses are mapped to actions using a table
-- Each entry contains a button/EXTI line and a callback function
-- The interrupt handler simply invokes the mapped callback
+Why a common ISR?
+Reduces duplicated code
+Centralizes EXTI clearing logic
+Keeps interrupt latency predictable
 
-This pattern separates logic from behavior and is commonly used in
-real-world embedded systems (keypads, HMIs, menu systems).
+Why bare-metal build (no IDE)?
+
+Forces understanding of:
+startup flow
+linker memory layout
+vector table placement
+toolchain-driven builds
 
 
 TARGET / HARDWARE
@@ -38,6 +45,7 @@ FEATURES
 - Button-to-action mapping using function pointers
 - Common interrupt handler to reduce duplicated ISR logic
 
+  
 
 WHAT MAKES THIS PROJECT PORTFOLIO-WORTHY
 ----------------------------------------
@@ -142,12 +150,35 @@ To add new functionality:
 
 The interrupt logic itself does not need to change.
 
+## What I Learned / Bugs I Hit
 
-NOTES / LIMITATIONS
--------------------
-- Delay is implemented using a simple busy-wait loop
-- Only rising-edge triggers are configured (can be extended)
-- Minimal register header is used for learning purposes
+How the Cortex-M reset flow jumps from vector table → Reset_Handler
+Importance of correct vector table placement in FLASH
+Why unused interrupts should have weak aliases
+EXTI pitfalls:
+forgetting to clear pending bits causes repeated interrupts
+incorrect SYSCFG EXTICR mapping breaks EXTI routing
+NVIC enable alone is not enough — EXTI + SYSCFG + GPIO must all agree
+How linker symbols are used during startup for .data and .bss init
+How to debug early startup code before main() using GDB
 
+## Limitations
 
+Busy-wait delay (not timer-based)
+No button debounce logic
+Only two EXTI lines demonstrated
+Minimal register header (not CMSIS-complete)
+No low-power modes used
+
+## Possible Extensions
+
+Add software debounce using a timer
+Support both rising and falling edge triggers
+Expand mapping table to support:
+long-press
+double-click
+Replace busy-wait with SysTick or TIM delay
+Add event queue instead of direct callback invocation
+Extend to matrix keypad scanning
+N
 
