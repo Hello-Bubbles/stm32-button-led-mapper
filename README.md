@@ -178,5 +178,4 @@ double-click
 Replace busy-wait with SysTick or TIM delay
 Add event queue instead of direct callback invocation
 Extend to matrix keypad scanning
-N
 
